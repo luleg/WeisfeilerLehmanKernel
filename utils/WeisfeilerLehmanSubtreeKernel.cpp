@@ -126,8 +126,9 @@ void WLSubTreeRps::readMAM(char *EdgeListIn, char *FeatsIn){
 WLSubTreeRps::WLSubTreeRps( char *CountIn ){
   load(CountIn);
   CountNorm = 0;
+
   for (std::map<hash_,int>::iterator it = Counter.begin(); it!= Counter.end(); it ++){
-    CountNorm+=(it->second)*(it->second);
+    CountNorm+=(unsigned long long int)(it->second)*(unsigned long long int)(it->second);
   }
   if (CountNorm == 0){
     CountNorm = -1;
@@ -160,7 +161,7 @@ WLSubTreeRps::WLSubTreeRps(
 
   CountNorm = 0;
   for (std::map<hash_,int>::iterator it = Counter.begin(); it!= Counter.end(); it ++){
-    CountNorm+=(it->second)*(it->second);
+    CountNorm+=(unsigned long long int)(it->second)*(unsigned long long int)(it->second);
   }
   if (CountNorm == 0){
     CountNorm = -1;
@@ -171,9 +172,7 @@ WLSubTreeRps::WLSubTreeRps(
 //
 WLSubTreeRps::~WLSubTreeRps(){
 
-  // for (int node = 0; node < Nodes.size();node ++){
-  //   delete Nodes[node];
-  // }
+
 }
 //
 // This is for debbugging
@@ -191,7 +190,7 @@ void WLSubTreeRps::display(){
   for (std::map<hash_,int>::iterator it = Counter.begin(); it!= Counter.end(); it ++){
     fprintf(stderr,"%s %d\n",it->first.c_str(),it->second);
   }
-  fprintf(stderr,"And the norm? %d\n",CountNorm);
+  fprintf(stderr,"And the norm? %llu\n",CountNorm);
 }
 
 void WLSubTreeRps::display_simple(){
@@ -201,7 +200,7 @@ void WLSubTreeRps::display_simple(){
     fprintf(stderr,"%s %d\n",it->first.c_str(),it->second);
     it++;
   }
-  fprintf(stderr,"And the norm? %d\n",CountNorm);
+  fprintf(stderr,"And the norm? %llu\n",CountNorm);
 }
 
 void WLSubTreeRps::do_rec_even(){
@@ -283,17 +282,15 @@ double WLSubTreeRps::similarity(
 
   fprintf(stderr,"Compute similarity:\t");
   tic();
-  int max_norm(1.0);
+  unsigned long long int max_norm(1.0);
   if (normalised){
     max_norm = std::max(CountNorm,OtherWLST->CountNorm);
   }
+
   std::map<hash_,int>& Count_base = Counter;
   std::map<hash_,int>& Count_oth  = OtherWLST->Counter;
-  if (Count_base.size() > Count_oth.size() ){
-    Count_base = Count_oth;
-    Count_oth  = Counter;
-  }
-  double accum = 0.0;
+
+  unsigned long long int accum = 0;
 
   std::map<hash_,int>::iterator it_oth = Count_oth.begin();
   for (std::map<hash_,int>::iterator it_base = Count_base.begin(); it_base != Count_base.end(); it_base ++){
@@ -304,12 +301,14 @@ double WLSubTreeRps::similarity(
       break;
     }
     if (it_oth->first == it_base->first){
-      accum += 1.0*(it_oth->second)*(it_base->second)/max_norm;
+
+      accum += (unsigned long long int)(it_oth->second)*(unsigned long long int)(it_base->second);
       it_oth ++;
     }
   }
   toc();
-  return accum;
+
+  return (double)1/max_norm*(double)accum;
 }
 
 void WLSubTreeRps::save(char *CounterOut){

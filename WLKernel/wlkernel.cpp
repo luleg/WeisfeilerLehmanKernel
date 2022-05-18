@@ -81,9 +81,16 @@ int main(int argc, char **argv){
     fprintf(stderr, "Weisfeiler Lehman embedding of %s directly read.\n",File2);
     WeisLehm2 = WLSubTreeRps(File2);
   }
-  double sim = WeisLehm1.similarity(&WeisLehm2,normalised);
+
+  double sim;
+  if (WeisLehm1.getSize() <=  WeisLehm2.getSize()) {
+    sim = WeisLehm1.similarity(&WeisLehm2,normalised);
+  }
+  else{
+    sim = WeisLehm2.similarity(&WeisLehm1,normalised);
+  }
   fprintf(stderr,"similarity=\n");
-  fprintf(stdout,"%.4e\n",sim);
+  fprintf(stdout,"%le\n",sim);
 
 
 

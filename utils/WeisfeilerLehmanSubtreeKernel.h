@@ -29,7 +29,7 @@ class WLSubTreeRps{
     MD5 hash_fun;
     std::map<hash_,int>::key_compare Comparator;
     std::map<hash_,int> Counter;
-    long long int CountNorm;
+    unsigned long long int CountNorm;
 
     void readMAM(char *EdgeListIn, char *FeatsIn);
     void do_rec_even();
@@ -65,6 +65,9 @@ class WLSubTreeRps{
 
     void save(char *CounterOut);
 
+    int getSize(){
+      return Counter.size();
+    };
 };
 
 
