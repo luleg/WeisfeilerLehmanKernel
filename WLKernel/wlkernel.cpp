@@ -82,7 +82,8 @@ int main(int argc, char **argv){
     WeisLehm2 = WLSubTreeRps(File2);
   }
   double sim = WeisLehm1.similarity(&WeisLehm2,normalised);
-  fprintf(stderr,"similarity=%f\n",sim);
+  fprintf(stderr,"similarity=\n");
+  fprintf(stdout,"%f\n",sim);
 
 
 
