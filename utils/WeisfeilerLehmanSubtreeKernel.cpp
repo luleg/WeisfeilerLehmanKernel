@@ -19,7 +19,7 @@ void toc(){
 
 void WLSubTreeRps::readMAM(char *EdgeListIn, char *FeatsIn){
   uint nb_nodes = 0;
-
+  tic();
   if (FeatsIn){
     FILE * featsinput = fopen(FeatsIn,"r");
     if (featsinput == NULL){
@@ -107,6 +107,8 @@ void WLSubTreeRps::readMAM(char *EdgeListIn, char *FeatsIn){
     }
   }
   fclose(finput);
+  fprintf(stderr,"Reading the graph from edgelist file:\t");
+  toc();
 
   if (not FeatsIn){
     for (int node = 0; node < nb_nodes; node ++){
@@ -311,6 +313,7 @@ double WLSubTreeRps::similarity(
 }
 
 void WLSubTreeRps::save(char *CounterOut){
+  tic();
   FILE * foutput = fopen(CounterOut,"w");
   if (foutput == NULL){
     fprintf(stderr,"The file %s cannot be opened\n", CounterOut);
@@ -320,9 +323,12 @@ void WLSubTreeRps::save(char *CounterOut){
     fprintf(foutput,"%d %s\n",it->second,it->first.c_str());
   }
   fclose(foutput);
+  fprintf(stderr,"Saving the embeddings:\t");
+  toc();
 }
 
 void WLSubTreeRps::load(char *CounterIn){
+  tic();
   FILE * finput = fopen(CounterIn,"r");
   if (finput == NULL){
     fprintf(stderr,"The file %s does not exist.\n", CounterIn);
@@ -337,4 +343,6 @@ void WLSubTreeRps::load(char *CounterIn){
   }
 
   fclose(finput);
+  fprintf(stderr,"Read from embeddings:\t");
+  toc();
 }
