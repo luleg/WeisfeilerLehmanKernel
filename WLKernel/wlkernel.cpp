@@ -83,7 +83,7 @@ int main(int argc, char **argv){
   }
   double sim = WeisLehm1.similarity(&WeisLehm2,normalised);
   fprintf(stderr,"similarity=\n");
-  fprintf(stdout,"%f\n",sim);
+  fprintf(stdout,"%.4e\n",sim);
 
 
 
