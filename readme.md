@@ -46,3 +46,8 @@ Options:
 ```
 
 Graphs `g1` and `g2` with respective node features `feat1` and `feat2` are graphs from Fig. 2 of [Shervashidze's paper](https://www.jmlr.org/papers/volume12/shervashidze11a/shervashidze11a.pdf). With a Wesfeiler-Lehman test of depth 1 and no normalisation, their kernel is found to be 11.
+
+
+## DOI
+
+[![DOI](https://zenodo.org/badge/493571761.svg)](https://zenodo.org/badge/latestdoi/493571761)
