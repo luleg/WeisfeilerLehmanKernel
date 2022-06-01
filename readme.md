@@ -26,7 +26,7 @@ In folder WLKernel:
 Computes the similarity between the graphs in `<File_1>` and `<File_2>`, based on the normalised dot product of their embeddings produced by a Weisfeiler-Lehman test.
 * If extension of `<File_i>` is `emb`, the programme assumes that the file contains an already computed embedding.
 
-<img align="right" src="Pic/weightedGraph.png" width="15%" height="15%">
+<img align="right" src="Pic/weightedGraph.png" width="20%" height="20%">
 
 * Otherwise, it computes the graph embedding using a Weisfeiler-Lehman test of depth 2. Initial node features are their weighted degrees. Graphs must be in a weighted edgelist format, with integer nodes (see Figure).
 
